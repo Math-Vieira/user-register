@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo:5.0
+    restart: always
+    container_name: register-person-db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: matheus
+      MONGO_INITDB_ROOT_PASSWORD: matheus123
+    volumes:
+      - ./data:/data/db
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ./docker_environment/entrypoint.sh
+    restart: always
+    container_name: register-person-api
+    ports:
+      - 3001:3001
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/node/app
+    depends_on:
+      - mongodb
