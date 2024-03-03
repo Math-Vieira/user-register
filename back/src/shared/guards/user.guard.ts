@@ -6,7 +6,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';
 import { ExecutionContext } from '@nestjs/common';
-import { JWT_SECRET } from '../utils/env-constants';
+import { JWT_SECRET } from '../utils/constants/env-constants';
 
 @Injectable()
 export class UserAuthGuard extends AuthGuard('jwt') {

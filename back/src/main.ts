@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { PORT } from './shared/utils/env-constants';
+import { PORT } from './shared/utils/constants/env-constants';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {

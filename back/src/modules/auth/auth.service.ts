@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
 import { Request } from 'express';
 import { BadRequest } from '@/shared/exceptions/bad-request.exception';
-import { JWT_EXPIRATION, JWT_SECRET } from '@/shared/utils/env-constants';
+import {
+  JWT_EXPIRATION,
+  JWT_SECRET,
+} from '@/shared/utils/constants/env-constants';
 
 @Injectable()
 export class AuthService {
