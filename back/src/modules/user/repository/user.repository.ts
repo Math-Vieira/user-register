@@ -11,10 +11,10 @@ export class UserRepository {
   }
 
   async findById(id: string): Promise<User> {
-    return await this.userModel.findById(id);
+    return await this.userModel.findById(id).select('-password');
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await this.userModel.findOne({ email: email });
+    return await this.userModel.findOne({ email: email }).select('-password');
   }
 }
