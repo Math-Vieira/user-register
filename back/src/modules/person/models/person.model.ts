@@ -5,4 +5,5 @@ export interface Person extends Document {
   email: string;
   avatar: string;
   age: number;
+  user_id: string;
 }

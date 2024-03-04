@@ -21,8 +21,11 @@ export class PersonController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async createPerson(@Body() createPersonDto: CreatePersonDto) {
-    return this.createPersonService.exec(createPersonDto);
+  async createPerson(
+    @Body() createPersonDto: CreatePersonDto,
+    @Headers('Authorization') token: string,
+  ) {
+    return this.createPersonService.exec(createPersonDto, token);
   }
 
   @Patch()
