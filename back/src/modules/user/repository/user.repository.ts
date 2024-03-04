@@ -15,6 +15,6 @@ export class UserRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await this.userModel.findOne({ email: email }).select('-password');
+    return await this.userModel.findOne({ email: email });
   }
 }

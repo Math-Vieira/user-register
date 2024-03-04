@@ -12,7 +12,7 @@ export class CreateUserService {
       createUserDto.email,
     );
 
-    if (emailAlreadyExists) {
+    if (!!emailAlreadyExists) {
       throw new EmailAlreadyUsed();
     }
 
