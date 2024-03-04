@@ -23,4 +23,5 @@ export const Error = styled.span`
   font-size: 12px;
   margin-top: 5px;
   margin-left: 2px;
+  max-width: 366px;
 `;

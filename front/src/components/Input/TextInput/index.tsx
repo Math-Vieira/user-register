@@ -19,7 +19,7 @@ export const TextInput = ({
   return (
     <S.Container>
       <S.Label>{label}</S.Label>
-      <S.Input {...props} {...register(name)} />
+      <S.Input {...props} {...register(name)} autoComplete="off" />
       {errors[name] && <S.Error>{errors[name].message}</S.Error>}
     </S.Container>
   );

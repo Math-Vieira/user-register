@@ -7,14 +7,14 @@ import { Button } from '@/components/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import loginSchema from './validationSchema';
+import registerSchema from './validationSchema';
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
+  } = useForm<Inputs>({ resolver: zodResolver(registerSchema) });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
@@ -24,16 +24,24 @@ export const LoginPage = () => {
     <UnauthenticatedLayout>
       <S.Main>
         <S.ContentContainer className="centralizer">
-          <S.FormAndCardContainer className="animeRight">
+          <S.FormAndCardContainer className="animeLeft">
             <S.Card>
               <img src={logo.src} />
             </S.Card>
             <S.FormContainer>
-              <FormTitle>Login</FormTitle>
+              <FormTitle>Cadastro</FormTitle>
               <S.Form onSubmit={handleSubmit(onSubmit)}>
                 <TextInput
+                  label="Nome"
+                  placeholder="Digite seu nome..."
+                  type="text"
+                  name="name"
+                  register={register}
+                  errors={errors}
+                />
+                <TextInput
                   label="E-mail"
-                  placeholder="Digite seu e-mail..."
+                  placeholder="Digite sua senha..."
                   type="email"
                   name="email"
                   register={register}
@@ -47,9 +55,17 @@ export const LoginPage = () => {
                   register={register}
                   errors={errors}
                 />
+                <TextInput
+                  label="Confirmação de senha"
+                  placeholder="Repita sua senha..."
+                  type="password"
+                  name="confirm_password"
+                  register={register}
+                  errors={errors}
+                />
                 <S.ButtonContainer>
                   <Button type="submit" fontSize="20px">
-                    Logar
+                    Cadastrar
                   </Button>
                 </S.ButtonContainer>
               </S.Form>
