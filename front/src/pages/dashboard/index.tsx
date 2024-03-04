@@ -1,5 +1,7 @@
+import { DashboardPage } from '@/templates/authenticated/Dashboard';
+
 const Dashboard = () => {
-  return <div style={{ height: '100%' }}>a</div>;
+  return <DashboardPage />;
 };
 
 export default Dashboard;
