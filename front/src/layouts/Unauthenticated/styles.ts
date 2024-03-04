@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const Header = styled.header`
   background-color: ${({ theme }) => theme.headerColor};
   color: ${({ theme }) => theme.textColor};
-  box-shadow: 0px 4px 4px ${({ theme }) => theme.headerShadowColor};
+  box-shadow: 3px 4px 4px ${({ theme }) => theme.headerShadowColor};
+  position: fixed;
+  top: 0;
+  width: 100%;
 `;
 
 export const HeaderContentContainer = styled.div`
@@ -22,4 +25,7 @@ export const ButtonContainer = styled.div`
 export const Footer = styled.footer`
   background-color: ${({ theme }) => theme.headerColor};
   color: ${({ theme }) => theme.textColor};
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
 `;

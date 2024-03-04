@@ -24,7 +24,7 @@ export const UnauthenticatedLayout = ({
         </S.HeaderContentContainer>
       </S.Header>
       {children}
-      <S.Footer></S.Footer>
+      <S.Footer>© 2024 - Matheus Vieira / Dash Skins - Challenge</S.Footer>
     </>
   );
 };
