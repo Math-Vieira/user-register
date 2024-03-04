@@ -1,6 +1,6 @@
 import { api } from '../api';
 
-type CreateUserPayload = {
+export type CreateUserPayload = {
   name: string;
   email: string;
   password: string;

@@ -8,6 +8,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import registerSchema from './validationSchema';
+import { useCreateUser } from '@/hooks/requestHooks/user/user-create-user';
+import { useRouter } from 'next/router';
 
 export const RegisterPage = () => {
   const {
@@ -15,9 +17,17 @@ export const RegisterPage = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>({ resolver: zodResolver(registerSchema) });
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const createUserService = useCreateUser();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const result = await createUserService.mutateAsync(data);
+
+    if (result) {
+      alert('Usuário criado com sucesso!');
+      router.push('/');
+    }
   };
 
   return (
@@ -64,7 +74,11 @@ export const RegisterPage = () => {
                   errors={errors}
                 />
                 <S.ButtonContainer>
-                  <Button type="submit" fontSize="20px">
+                  <Button
+                    type="submit"
+                    fontSize="20px"
+                    disabled={createUserService.isPending}
+                  >
                     Cadastrar
                   </Button>
                 </S.ButtonContainer>
