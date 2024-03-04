@@ -5,5 +5,6 @@ export const darkTheme = {
   mainThemeColor: '#C013C3',
   inputColor: '#151515',
   backgroundColor: '#0F0F0F',
-  headerShadowColor: 'rgba(61,61,61,0.250)'
+  headerShadowColor: 'rgba(61,61,61,0.250)',
+  textColor: '#fff'
 };

@@ -1,3 +1,9 @@
+import { UnauthenticatedLayout } from '@/layouts/Unauthenticated';
+
 export const LoginPage = () => {
-  return 'login';
+  return (
+    <UnauthenticatedLayout>
+      <div style={{ height: '500px' }}>a</div>
+    </UnauthenticatedLayout>
+  );
 };
