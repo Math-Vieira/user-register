@@ -18,9 +18,11 @@ import { UpdatePersonDto } from './dto/update-person.dto';
 import { UpdatePersonService } from './services/update-person.service';
 import { DeletePersonService } from './services/delete-person.service';
 import { GetPersonService } from './services/get-persons.service';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('person')
 @UseGuards(UserAuthGuard)
+@UseGuards(ThrottlerGuard)
 export class PersonController {
   constructor(
     private readonly createPersonService: CreatePersonService,
@@ -56,6 +58,7 @@ export class PersonController {
     @Headers('Authorization') token: string,
     @Param('page') page: string,
   ) {
+    console.log('dale');
     return await this.getPersonService.exec(+page, token);
   }
 }

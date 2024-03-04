@@ -14,8 +14,10 @@ import { SignInUserDto } from './dto/signIn-user.dto';
 import { SignInUserService } from './services/signIn-user.service';
 import { GetUserService } from './services/get-user.service';
 import { UserAuthGuard } from '@/shared/guards/user.guard';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('user')
+@UseGuards(ThrottlerGuard)
 export class UserController {
   constructor(
     private readonly createUserService: CreateUserService,

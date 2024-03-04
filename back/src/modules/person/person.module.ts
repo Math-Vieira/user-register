@@ -7,10 +7,17 @@ import { PersonRepository } from './repository/person.repository';
 import { UpdatePersonService } from './services/update-person.service';
 import { DeletePersonService } from './services/delete-person.service';
 import { GetPersonService } from './services/get-persons.service';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Person', schema: PersonSchema }]),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 1000,
+        limit: 10,
+      },
+    ]),
   ],
   controllers: [PersonController],
   providers: [

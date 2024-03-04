@@ -7,9 +7,18 @@ import { SignInUserService } from './services/signIn-user.service';
 import { UserRepository } from './repository/user.repository';
 import { AuthService } from '../auth/auth.service';
 import { GetUserService } from './services/get-user.service';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 1000,
+        limit: 10,
+      },
+    ]),
+  ],
   controllers: [UserController],
   providers: [
     CreateUserService,
