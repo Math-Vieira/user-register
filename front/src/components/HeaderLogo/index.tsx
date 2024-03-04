@@ -34,8 +34,8 @@ export const HeaderLogo = () => {
           y2="-16"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#C013C4" />
-          <stop offset="1" stop-color="#5C095D" />
+          <stop stopColor="#C013C4" />
+          <stop offset="1" stopColor="#5C095D" />
         </linearGradient>
         <image
           id="image0_1_179"
