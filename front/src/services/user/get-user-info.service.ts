@@ -5,6 +5,6 @@ export const getUserInfoService = async () => {
     const response = await api.get('/user');
     return response;
   } catch (error) {
-    console.log(error);
+    alert('Erro ao buscar informações do usuário, tente novamente.');
   }
 };

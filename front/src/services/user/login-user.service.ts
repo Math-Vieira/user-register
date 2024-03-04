@@ -14,6 +14,6 @@ export const loginUserService = async (data: LoginUserPayload) => {
       maxAge: 60 * 60 * 1 // 1 hour
     });
   } catch (error) {
-    console.log(error);
+    alert('Erro ao fazer login, tente novamente.');
   }
 };

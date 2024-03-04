@@ -12,6 +12,6 @@ export const createUserService = async (data: CreateUserPayload) => {
     const response = await api.post('/user/signUp', data);
     return response;
   } catch (error) {
-    console.log(error);
+    alert('Erro ao criar usuário, tente novamente.');
   }
 };
