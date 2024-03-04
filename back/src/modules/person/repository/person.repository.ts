@@ -17,4 +17,8 @@ export class PersonRepository {
       new: true,
     });
   }
+
+  async deleteById(id: string): Promise<Person> {
+    return await this.personModel.findByIdAndDelete(id);
+  }
 }

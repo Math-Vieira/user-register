@@ -7,6 +7,7 @@ import {
   Headers,
   HttpCode,
   HttpStatus,
+  Param,
   Patch,
   Post,
   UseGuards,
@@ -15,6 +16,7 @@ import { CreatePersonService } from './services/create-person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { UpdatePersonService } from './services/update-person.service';
+import { DeletePersonService } from './services/delete-person.service';
 
 @Controller('person')
 @UseGuards(UserAuthGuard)
@@ -22,6 +24,7 @@ export class PersonController {
   constructor(
     private readonly createPersonService: CreatePersonService,
     private readonly updatePersonService: UpdatePersonService,
+    private readonly deletePersonService: DeletePersonService,
   ) {}
 
   @Post()
@@ -41,8 +44,8 @@ export class PersonController {
 
   @Delete('/delete/:id')
   @HttpCode(HttpStatus.OK)
-  async deletePerson() {
-    return 'deletePerson';
+  async deletePerson(@Param('id') id: string) {
+    return await this.deletePersonService.exec(id);
   }
 
   @Get('/list/:page')
