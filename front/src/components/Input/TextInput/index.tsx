@@ -1,13 +1,26 @@
 import { InputHTMLAttributes } from 'react';
 import * as S from './style';
+import { UseFormRegister } from 'react-hook-form';
 
-type TextInputProps = InputHTMLAttributes<HTMLInputElement> & { label: string };
+type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  name: string;
+  register: UseFormRegister<any>;
+  errors: any;
+};
 
-export const TextInput = ({ label, ...props }: TextInputProps) => {
+export const TextInput = ({
+  label,
+  name,
+  register,
+  errors,
+  ...props
+}: TextInputProps) => {
   return (
     <S.Container>
       <S.Label>{label}</S.Label>
-      <S.Input {...props} />
+      <S.Input {...props} {...register(name)} />
+      {errors[name] && <S.Error>{errors[name].message}</S.Error>}
     </S.Container>
   );
 };

@@ -17,3 +17,10 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.textColor};
   outline: none;
 `;
+
+export const Error = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 2px;
+`;
