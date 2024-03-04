@@ -7,7 +7,7 @@ type CreateUserPayload = {
   confirm_password: string;
 };
 
-export const createUser = async (data: CreateUserPayload) => {
+export const createUserService = async (data: CreateUserPayload) => {
   try {
     const response = await api.post('/user/signUp', data);
     return response;

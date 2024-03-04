@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import loginSchema from './validationSchema';
+import { useLoginUser } from '@/hooks/requestHooks/user/use-login-user';
 
 export const LoginPage = () => {
   const {
@@ -16,8 +17,10 @@ export const LoginPage = () => {
     formState: { errors }
   } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const loginUserService = useLoginUser();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await loginUserService.mutateAsync(data);
   };
 
   return (
@@ -48,7 +51,11 @@ export const LoginPage = () => {
                   errors={errors}
                 />
                 <S.ButtonContainer>
-                  <Button type="submit" fontSize="20px">
+                  <Button
+                    type="submit"
+                    fontSize="20px"
+                    disabled={loginUserService.isPending}
+                  >
                     Logar
                   </Button>
                 </S.ButtonContainer>
