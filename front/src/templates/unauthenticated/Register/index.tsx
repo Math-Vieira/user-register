@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import registerSchema from './validationSchema';
 import { useCreateUser } from '@/hooks/requestHooks/user/user-create-user';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const RegisterPage = () => {
   const {
@@ -22,13 +23,15 @@ export const RegisterPage = () => {
   const createUserService = useCreateUser();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const result = await createUserService.mutateAsync(data);
+    await createUserService.makeRequest(data);
+  };
 
-    if (result) {
+  useEffect(() => {
+    if (createUserService.data) {
       alert('Usuário criado com sucesso!');
       router.push('/');
     }
-  };
+  }, [createUserService.data]);
 
   return (
     <UnauthenticatedLayout>
@@ -77,7 +80,7 @@ export const RegisterPage = () => {
                   <Button
                     type="submit"
                     fontSize="20px"
-                    disabled={createUserService.isPending}
+                    disabled={createUserService.loading}
                   >
                     Cadastrar
                   </Button>

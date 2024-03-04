@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import loginSchema from './validationSchema';
 import { useLoginUser } from '@/hooks/requestHooks/user/use-login-user';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
   const {
@@ -22,12 +23,14 @@ export const LoginPage = () => {
   const loginUserService = useLoginUser();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const result = await loginUserService.mutateAsync(data);
-    console.log(result);
-    if (!!result) {
+    await loginUserService.makeRequest(data);
+  };
+
+  useEffect(() => {
+    if (loginUserService.data) {
       router.push('/dashboard');
     }
-  };
+  }, [loginUserService.data]);
 
   return (
     <UnauthenticatedLayout>
@@ -60,7 +63,7 @@ export const LoginPage = () => {
                   <Button
                     type="submit"
                     fontSize="20px"
-                    disabled={loginUserService.isPending}
+                    disabled={loginUserService.loading}
                   >
                     Logar
                   </Button>

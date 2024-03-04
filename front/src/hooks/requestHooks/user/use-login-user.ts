@@ -3,13 +3,8 @@ import {
   LoginUserPayload
 } from '@/services/user/login-user.service';
 
-import { useMutation } from '@tanstack/react-query';
+import { useAxios } from '../useAxios';
 
 export const useLoginUser = () => {
-  return useMutation({
-    mutationFn: async (payload: LoginUserPayload) => {
-      return await loginUserService(payload);
-    },
-    throwOnError: false
-  });
+  return useAxios<LoginUserPayload>(loginUserService);
 };
