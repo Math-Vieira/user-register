@@ -21,4 +21,19 @@ export class PersonRepository {
   async deleteById(id: string): Promise<Person> {
     return await this.personModel.findByIdAndDelete(id);
   }
+
+  async findPeopleByUserId(
+    userId: string,
+    offset: number,
+    limit: number,
+  ): Promise<Person[]> {
+    return await this.personModel
+      .find({ user_id: userId })
+      .skip(offset)
+      .limit(limit);
+  }
+
+  async getTotalPeopleByUserId(userId: string): Promise<number> {
+    return await this.personModel.countDocuments({ user_id: userId });
+  }
 }

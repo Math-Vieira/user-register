@@ -6,6 +6,7 @@ import { CreatePersonService } from './services/create-person.service';
 import { PersonRepository } from './repository/person.repository';
 import { UpdatePersonService } from './services/update-person.service';
 import { DeletePersonService } from './services/delete-person.service';
+import { GetPersonService } from './services/get-persons.service';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DeletePersonService } from './services/delete-person.service';
     PersonRepository,
     UpdatePersonService,
     DeletePersonService,
+    GetPersonService,
   ],
 })
 export class PersonModule {}
