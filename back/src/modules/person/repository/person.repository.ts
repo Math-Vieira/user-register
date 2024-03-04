@@ -11,4 +11,10 @@ export class PersonRepository {
   async create(person: Person): Promise<Person> {
     return await this.personModel.create(person);
   }
+
+  async updateById(person: Person): Promise<Person> {
+    return await this.personModel.findByIdAndUpdate(person._id, person, {
+      new: true,
+    });
+  }
 }

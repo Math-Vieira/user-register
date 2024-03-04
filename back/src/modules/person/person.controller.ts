@@ -13,11 +13,16 @@ import {
 } from '@nestjs/common';
 import { CreatePersonService } from './services/create-person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
+import { UpdatePersonService } from './services/update-person.service';
 
 @Controller('person')
 @UseGuards(UserAuthGuard)
 export class PersonController {
-  constructor(private readonly createPersonService: CreatePersonService) {}
+  constructor(
+    private readonly createPersonService: CreatePersonService,
+    private readonly updatePersonService: UpdatePersonService,
+  ) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -25,13 +30,13 @@ export class PersonController {
     @Body() createPersonDto: CreatePersonDto,
     @Headers('Authorization') token: string,
   ) {
-    return this.createPersonService.exec(createPersonDto, token);
+    return await this.createPersonService.exec(createPersonDto, token);
   }
 
   @Patch()
   @HttpCode(HttpStatus.OK)
-  async updatePerson() {
-    return 'updatePerson';
+  async updatePerson(@Body() updatePersonDto: UpdatePersonDto) {
+    return await this.updatePersonService.exec(updatePersonDto);
   }
 
   @Delete('/delete/:id')
