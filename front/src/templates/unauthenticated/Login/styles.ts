@@ -28,3 +28,12 @@ export const Card = styled.div`
 `;
 
 export const FormContainer = styled.div``;
+
+export const Form = styled.form`
+  margin-top: 30px;
+`;
+
+export const ButtonContainer = styled.div`
+  margin-left: 2px;
+  margin-top: 20px;
+`;
