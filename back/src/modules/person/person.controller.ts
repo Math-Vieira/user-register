@@ -58,7 +58,6 @@ export class PersonController {
     @Headers('Authorization') token: string,
     @Param('page') page: string,
   ) {
-    console.log('dale');
     return await this.getPersonService.exec(+page, token);
   }
 }

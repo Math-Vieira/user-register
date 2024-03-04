@@ -26,7 +26,7 @@ export class SignInUserService {
 
     const jwtToken = await this.authService.createAccessToken(user._id);
 
-    return { jwtToken };
+    return { jwtToken, name: user.name, email: user.email };
   }
 
   private async comparePassword(
