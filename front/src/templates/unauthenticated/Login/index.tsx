@@ -9,6 +9,7 @@ import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import loginSchema from './validationSchema';
 import { useLoginUser } from '@/hooks/requestHooks/user/use-login-user';
+import { useRouter } from 'next/router';
 
 export const LoginPage = () => {
   const {
@@ -16,11 +17,16 @@ export const LoginPage = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
+  const router = useRouter();
 
   const loginUserService = useLoginUser();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await loginUserService.mutateAsync(data);
+    const result = await loginUserService.mutateAsync(data);
+    console.log(result);
+    if (!!result) {
+      router.push('/dashboard');
+    }
   };
 
   return (

@@ -13,7 +13,15 @@ export const loginUserService = async (data: LoginUserPayload) => {
     setCookie(undefined, 'user.token', jwtToken, {
       maxAge: 60 * 60 * 1 // 1 hour
     });
-  } catch (error) {
-    alert('Erro ao fazer login, tente novamente.');
+    return jwtToken;
+  } catch (error: any) {
+    if (Array.isArray(error.response.data.message)) {
+      const messages = error.response.data.message;
+      messages.forEach((message: string) => {
+        alert(message);
+      });
+    } else {
+      alert(error.response.data.message);
+    }
   }
 };
