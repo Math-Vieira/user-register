@@ -34,11 +34,11 @@ export const LoginPage = () => {
     if (loginUserService.data) {
       //Config cookies and global user state
       const { jwtToken, name, email } = loginUserService.data;
+
       setCookie(undefined, 'user.token', jwtToken, {
         maxAge: 60 * 60 * 1 // 1 hour
       });
       dispatch(setUser({ name, email }));
-      router.push('/dashboard');
     }
   }, [loginUserService.data]);
 

@@ -1,7 +1,4 @@
-import { setCookie } from 'nookies';
 import { api } from '../api';
-import { setUser } from '@/store/user';
-import { useDispatch } from 'react-redux';
 
 export type LoginUserPayload = {
   email: string;
