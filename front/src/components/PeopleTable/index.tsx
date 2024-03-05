@@ -5,6 +5,8 @@ import { Button } from '../Button';
 import { PeopleTableHeader } from '../PeopleTableHeader';
 import { PeopleTableBody } from '../PeopleTableBody';
 import { configPeopleList } from '@/utils/functions/config-people-list';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export type Person = {
   name: string;
@@ -35,6 +37,9 @@ export const PeopleTable = ({
     totalPages: 1,
     people: []
   });
+  const personToDelete = useSelector(
+    (state: RootState) => state.personToDelete
+  );
 
   const incrementPage = () =>
     tablePage < peopleList.totalPages && updateTablePage(tablePage + 1);

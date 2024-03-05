@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './user';
+import personToDeleteSlice from './people';
 
 const store = configureStore({
   reducer: {
-    user: userSlice
+    user: userSlice,
+    personToDelete: personToDeleteSlice
   }
 });
 
