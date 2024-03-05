@@ -19,6 +19,11 @@ export const Table = styled.table`
     padding: 10px;
     font-size: 20px;
   }
+
+  & img {
+    max-width: 50px;
+    border-radius: 50%;
+  }
 `;
 
 export const ButtonControllerContainer = styled.div`
