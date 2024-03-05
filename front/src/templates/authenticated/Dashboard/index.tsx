@@ -11,7 +11,6 @@ import { PeopleTable } from '@/components/PeopleTable';
 
 export const DashboardPage = () => {
   const dispatch = useDispatch();
-  const [tablePage, setTablePage] = useState(2);
   const user = useSelector((state: RootState) => state.user);
   const getUserService = useGetUser();
 
