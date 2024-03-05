@@ -7,6 +7,7 @@ import { SignInUserService } from './services/signIn-user.service';
 import { UserRepository } from './repository/user.repository';
 import { AuthService } from '../auth/auth.service';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { GetUserService } from './services/get-user.service';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     SignInUserService,
     UserRepository,
     AuthService,
+    GetUserService,
   ],
 })
 export class UserModule {}

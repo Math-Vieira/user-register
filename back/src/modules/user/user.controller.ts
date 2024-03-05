@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Headers,
   HttpCode,
   HttpStatus,
   Post,
@@ -11,6 +13,8 @@ import { CreateUserService } from './services/create-user.service';
 import { SignInUserDto } from './dto/signIn-user.dto';
 import { SignInUserService } from './services/signIn-user.service';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { UserAuthGuard } from '@/shared/guards/user.guard';
+import { GetUserService } from './services/get-user.service';
 
 @Controller('user')
 @UseGuards(ThrottlerGuard)
@@ -18,6 +22,7 @@ export class UserController {
   constructor(
     private readonly createUserService: CreateUserService,
     private readonly signInUserService: SignInUserService,
+    private readonly getUserService: GetUserService,
   ) {}
 
   @Post('/signUp')
@@ -30,5 +35,12 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   async signIn(@Body() signInUserDto: SignInUserDto) {
     return await this.signInUserService.exec(signInUserDto);
+  }
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(UserAuthGuard)
+  async getUser(@Headers('Authorization') token: string) {
+    return await this.getUserService.exec(token);
   }
 }
