@@ -20,3 +20,17 @@ export const Table = styled.table`
     font-size: 20px;
   }
 `;
+
+export const ButtonControllerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+
+  & span {
+    color: ${({ theme }) => theme.textColor};
+    font-weight: bold;
+    font-size: 35px;
+    margin: 0 20px;
+  }
+`;

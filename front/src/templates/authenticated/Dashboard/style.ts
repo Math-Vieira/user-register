@@ -7,13 +7,13 @@ export const Main = styled.main`
 export const ContentContainer = styled.div`
   min-height: 100vh;
   display: flex;
-  align-items: center;
+
   justify-content: center;
 `;
 
 export const TableContainer = styled.div`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 15vh;
 `;
 
 export const TitleContainer = styled.div`

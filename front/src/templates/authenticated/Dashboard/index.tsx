@@ -21,6 +21,7 @@ export const DashboardPage = () => {
 
   useEffect(() => {
     if (getUserService.data) {
+      //set user data - global store
       const { data } = getUserService;
       const { name, email } = data.data;
       dispatch(setUser({ name, email }));

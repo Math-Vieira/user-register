@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import * as S from './style';
 import { useGetPeople } from '@/hooks/requestHooks/person/use-get-people';
 import { PeopleTableRow } from '../PeopleTableRow';
+import { Button } from '../Button';
+import { PeopleTableHeader } from '../PeopleTableHeader';
+import { PeopleTableBody } from '../PeopleTableBody';
 
 export type Person = {
   name: string;
@@ -11,7 +14,7 @@ export type Person = {
   _id: string;
 };
 
-type TableInfo = {
+export type TableInfo = {
   totalPages: number;
   people: Person[];
 };
@@ -24,34 +27,31 @@ export const PeopleTable = () => {
     people: []
   };
 
+  const incrementPage = () =>
+    tablePage < peopleList.totalPages && setTablePage(tablePage + 1);
+
+  const decrementPage = () => tablePage > 1 && setTablePage(tablePage - 1);
+
   useEffect(() => {
     getPeopleService.makeRequest(tablePage);
   }, [tablePage]);
   return (
-    <S.Table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Avatar</th>
-          <th>Idade</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {peopleList.people.map((person: Person) => {
-          return (
-            <PeopleTableRow
-              key={person._id}
-              name={person.name}
-              email={person.email}
-              avatar={person.avatar}
-              age={person.age}
-              _id={person._id}
-            />
-          );
-        })}
-      </tbody>
-    </S.Table>
+    <>
+      <S.Table>
+        <PeopleTableHeader />
+        <PeopleTableBody peopleList={peopleList} />
+      </S.Table>
+      <S.ButtonControllerContainer>
+        <Button onClick={decrementPage} fontSize="50px">
+          {'<'}
+        </Button>
+        <span>
+          {tablePage} / {peopleList.totalPages}
+        </span>
+        <Button onClick={incrementPage} fontSize="50px">
+          {'>'}
+        </Button>
+      </S.ButtonControllerContainer>
+    </>
   );
 };
