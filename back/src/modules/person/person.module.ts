@@ -6,7 +6,7 @@ import { CreatePersonService } from './services/create-person.service';
 import { PersonRepository } from './repository/person.repository';
 import { UpdatePersonService } from './services/update-person.service';
 import { DeletePersonService } from './services/delete-person.service';
-import { GetPersonService } from './services/get-persons.service';
+import { GetPeopleService } from './services/get-people.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
@@ -25,7 +25,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     PersonRepository,
     UpdatePersonService,
     DeletePersonService,
-    GetPersonService,
+    GetPeopleService,
   ],
 })
 export class PersonModule {}

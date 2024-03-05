@@ -17,7 +17,7 @@ import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { UpdatePersonService } from './services/update-person.service';
 import { DeletePersonService } from './services/delete-person.service';
-import { GetPersonService } from './services/get-persons.service';
+import { GetPeopleService } from './services/get-people.service';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('person')
@@ -28,7 +28,7 @@ export class PersonController {
     private readonly createPersonService: CreatePersonService,
     private readonly updatePersonService: UpdatePersonService,
     private readonly deletePersonService: DeletePersonService,
-    private readonly getPersonService: GetPersonService,
+    private readonly getPeopleService: GetPeopleService,
   ) {}
 
   @Post()
@@ -54,10 +54,10 @@ export class PersonController {
 
   @Get('/list/:page')
   @HttpCode(HttpStatus.OK)
-  async getPersons(
+  async getPeople(
     @Headers('Authorization') token: string,
     @Param('page') page: string,
   ) {
-    return await this.getPersonService.exec(+page, token);
+    return await this.getPeopleService.exec(+page, token);
   }
 }

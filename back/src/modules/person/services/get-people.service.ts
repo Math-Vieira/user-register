@@ -1,9 +1,9 @@
 import { obtainUserIdFromToken } from '@/shared/utils/functions/obtain-user-id-from-token.util';
-import { PersonRepository } from './../repository/person.repository';
+import { PersonRepository } from '../repository/person.repository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class GetPersonService {
+export class GetPeopleService {
   constructor(private readonly personRepository: PersonRepository) {}
   async exec(page: number, token: string) {
     const user_id = obtainUserIdFromToken(token);
