@@ -30,7 +30,8 @@ export class PersonRepository {
     return await this.personModel
       .find({ user_id: userId })
       .skip(offset)
-      .limit(limit);
+      .limit(limit)
+      .sort({ createdAt: -1 });
   }
 
   async getTotalPeopleByUserId(userId: string): Promise<number> {
