@@ -39,6 +39,8 @@ export const LoginPage = () => {
         maxAge: 60 * 60 * 1 // 1 hour
       });
       dispatch(setUser({ name, email }));
+
+      router.push('/dashboard');
     }
   }, [loginUserService.data]);
 

@@ -18,7 +18,8 @@ export class GetPeopleService {
       limit,
     );
 
-    const totalPages = Math.ceil(totalPeople / limit);
+    let totalPages = Math.ceil(totalPeople / limit);
+    if (!totalPages) totalPages = 1;
 
     return {
       totalPages,
