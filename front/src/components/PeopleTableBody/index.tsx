@@ -5,9 +5,13 @@ import * as S from './style';
 
 type PeopleTableBodyProps = {
   peopleList: TableInfo;
+  deletedPersonId: string;
 };
 
-export const PeopleTableBody = ({ peopleList }: PeopleTableBodyProps) => {
+export const PeopleTableBody = ({
+  peopleList,
+  deletedPersonId
+}: PeopleTableBodyProps) => {
   return (
     <tbody>
       {peopleList.people.map((person: Person) => {
@@ -19,6 +23,7 @@ export const PeopleTableBody = ({ peopleList }: PeopleTableBodyProps) => {
             avatar={person.avatar}
             age={person.age}
             _id={person._id}
+            deletedPersonId={deletedPersonId}
           />
         );
       })}

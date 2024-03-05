@@ -34,6 +34,19 @@ img {
   animation: animeLeft 0.3s ease-in-out 0.2s forwards;
 }
 
+.animeLeftOut {
+  opacity: 1;
+  animation: animeLeftOut 0.3s ease-in-out 0.2s forwards;
+}
+
+@keyframes animeLeftOut {
+  to {
+    opacity: 0;
+    display: none;
+    transform: translateX(-20px);
+  }
+}
+
 @keyframes animeRight {
   to {
     opacity: 1;

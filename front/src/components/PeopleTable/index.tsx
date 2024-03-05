@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { DeletePersonModal } from '../modals/DeletePersonModal';
 import { setPersonToDelete } from '@/store/people';
+import { delayAction } from '@/utils/functions/delay-action';
 
 export type Person = {
   name: string;
@@ -63,17 +64,22 @@ export const PeopleTable = ({
 
   //Add new person to list
   useEffect(() => {
-    //TODO ver se nao bugou
-    if (newPerson || deletedPersonId) {
-      getPeopleService.makeRequest(tablePage);
-    }
-  }, [newPerson, deletedPersonId]);
+    newPerson && getPeopleService.makeRequest(tablePage);
+  }, [newPerson]);
+
+  useEffect(() => {
+    const refetchPeople = () => getPeopleService.makeRequest(tablePage);
+    deletedPersonId && delayAction(refetchPeople, 1000);
+  }, [deletedPersonId]);
 
   return (
     <>
       <S.Table>
         <PeopleTableHeader />
-        <PeopleTableBody peopleList={peopleList} />
+        <PeopleTableBody
+          peopleList={peopleList}
+          deletedPersonId={deletedPersonId}
+        />
       </S.Table>
       <S.ButtonControllerContainer>
         <Button onClick={decrementPage} fontSize="50px">

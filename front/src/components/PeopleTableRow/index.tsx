@@ -4,11 +4,22 @@ import { Person } from '../PeopleTable';
 import * as S from './style';
 import { setPersonToDelete } from '@/store/people';
 
-export const PeopleTableRow = ({ name, age, avatar, email, _id }: Person) => {
+type PeopleTableRowProps = Person & {
+  deletedPersonId: string;
+};
+
+export const PeopleTableRow = ({
+  name,
+  age,
+  avatar,
+  email,
+  _id,
+  deletedPersonId
+}: PeopleTableRowProps) => {
   const dispatch = useDispatch();
 
   return (
-    <tr className="animeLeft">
+    <tr className={_id === deletedPersonId ? 'animeLeftOut' : 'animeLeft'}>
       <td>{name}</td>
       <td>{email}</td>
       <td>
