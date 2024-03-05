@@ -16,14 +16,6 @@ export const HeaderContentContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const NameContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: end;
-  font-size: 20px;
-  cursor: pointer;
-`;
-
 export const Footer = styled.footer`
   background-color: ${({ theme }) => theme.headerColor};
   color: ${({ theme }) => theme.textColor};

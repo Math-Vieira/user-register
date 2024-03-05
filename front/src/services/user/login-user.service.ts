@@ -8,26 +8,9 @@ export type LoginUserPayload = {
   password: string;
 };
 
-type GlobalStateUserConfig = {
-  jwtToken: string;
-  name: string;
-  email: string;
-};
-// const configCookiesAndGlobalState = ({
-//   jwtToken,
-//   name,
-//   email
-// }: GlobalStateUserConfig) => {
-//   setCookie(undefined, 'user.token', jwtToken, {
-//     maxAge: 60 * 60 * 1 // 1 hour
-//   });
-//   useDispatch()(setUser({ name, email }));
-// };
-
 export const loginUserService = async (data: LoginUserPayload) => {
   try {
     const response = await api.post('/user/signIn', data);
-    const { jwtToken, name, email } = response.data;
     return response.data;
   } catch (error: any) {
     if (Array.isArray(error.response.data.message)) {

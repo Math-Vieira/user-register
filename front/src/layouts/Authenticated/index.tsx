@@ -2,6 +2,7 @@ import * as S from './styles';
 import { useRouter } from 'next/router';
 import { HeaderLogo } from '@/components/HeaderLogo';
 import { destroyCookie } from 'nookies';
+import { Button } from '@/components/Button';
 
 type AuthenticatedLayoutProps = {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export const AuthenticatedLayout = ({
       <S.Header>
         <S.HeaderContentContainer className="centralizer">
           <HeaderLogo />
-          <S.NameContainer onClick={logout}>{userName} / Sair</S.NameContainer>
+          <Button onClick={logout}>{userName} / Sair</Button>
         </S.HeaderContentContainer>
       </S.Header>
       {children}
