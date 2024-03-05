@@ -18,6 +18,12 @@ export const FormAndCardContainer = styled.div`
   grid-template-columns: 15fr 11fr;
   justify-content: center;
   gap: 30px;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    /* background-color: red; */
+    width: 100%;
+  }
 `;
 
 export const Card = styled.div`
@@ -28,6 +34,10 @@ export const Card = styled.div`
   width: 500px;
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.54);
   padding: 70px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export const FormContainer = styled.div``;
