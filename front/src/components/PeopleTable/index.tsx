@@ -7,8 +7,9 @@ import { PeopleTableBody } from '../PeopleTableBody';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { DeletePersonModal } from '../modals/DeletePersonModal';
-import { setPersonToDelete } from '@/store/people';
+import { setPersonToDelete, setPersonToEdit } from '@/store/people';
 import { delayAction } from '@/utils/functions/delay-action';
+import { EditPersonModal } from '../modals/EditPersonModal';
 
 export type Person = {
   name: string;
@@ -41,8 +42,13 @@ export const PeopleTable = ({
     totalPages: 1,
     people: []
   });
+  const fetchPeople = () => getPeopleService.makeRequest(tablePage);
+
   const personToDelete = useSelector(
-    (state: RootState) => state.personToDelete
+    (state: RootState) => state.selectedPerson.personToDelete
+  );
+  const personToEdit = useSelector(
+    (state: RootState) => state.selectedPerson.personToEdit
   );
 
   const incrementPage = () =>
@@ -52,7 +58,7 @@ export const PeopleTable = ({
 
   //Get people on page change
   useEffect(() => {
-    getPeopleService.makeRequest(tablePage);
+    fetchPeople();
   }, [tablePage]);
 
   //Set people list on data change
@@ -64,12 +70,11 @@ export const PeopleTable = ({
 
   //Add new person to list
   useEffect(() => {
-    newPerson && getPeopleService.makeRequest(tablePage);
+    newPerson && fetchPeople();
   }, [newPerson]);
 
   useEffect(() => {
-    const refetchPeople = () => getPeopleService.makeRequest(tablePage);
-    deletedPersonId && delayAction(refetchPeople, 1000);
+    deletedPersonId && delayAction(fetchPeople, 1000);
   }, [deletedPersonId]);
 
   return (
@@ -101,6 +106,19 @@ export const PeopleTable = ({
           }}
           defineDeletedPerson={(id: string) => setDeletedPersonId(id)}
           personToDelete={personToDelete}
+        />
+      )}
+
+      {personToEdit && (
+        <EditPersonModal
+          actionText="EDITAR PESSOA"
+          closeModal={() => {
+            dispatch(setPersonToEdit(''));
+          }}
+          title="Editando pessoa"
+          personToEdit={personToEdit}
+          initialData={peopleList.people.find((e) => e._id === personToEdit)}
+          fetchPeople={fetchPeople}
         />
       )}
     </>

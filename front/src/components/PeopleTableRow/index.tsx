@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../Button';
 import { Person } from '../PeopleTable';
 import * as S from './style';
-import { setPersonToDelete } from '@/store/people';
+import { setPersonToDelete, setPersonToEdit } from '@/store/people';
 
 type PeopleTableRowProps = Person & {
   deletedPersonId: string;
@@ -23,7 +23,7 @@ export const PeopleTableRow = ({
       <td>{name}</td>
       <td>{email}</td>
       <td>
-        <img src={avatar} />
+        <img src={avatar} alt={`${name} - avatar`} />
       </td>
       <td>{age}</td>
       <td>
@@ -35,7 +35,13 @@ export const PeopleTableRow = ({
           >
             Deletar
           </Button>
-          <Button>Editar</Button>
+          <Button
+            onClick={() => {
+              dispatch(setPersonToEdit(_id));
+            }}
+          >
+            Editar
+          </Button>
         </S.ActionContainer>
       </td>
     </tr>

@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = '';
+const initialState = { personToDelete: '', personToEdit: '' };
 
-const PersonToDeleteSlice = createSlice({
-  name: 'peopleToDelete',
+const SelectedPersonSlice = createSlice({
+  name: 'selectedPerson',
   initialState: initialState,
   reducers: {
     setPersonToDelete(state, action: PayloadAction<string>) {
-      return action.payload;
+      return { ...state, personToDelete: action.payload };
+    },
+    setPersonToEdit(state, action: PayloadAction<string>) {
+      return { ...state, personToEdit: action.payload };
     }
   }
 });
 
-export const { setPersonToDelete } = PersonToDeleteSlice.actions;
+export const { setPersonToDelete, setPersonToEdit } =
+  SelectedPersonSlice.actions;
 
-export default PersonToDeleteSlice.reducer;
+export default SelectedPersonSlice.reducer;
