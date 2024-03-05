@@ -9,7 +9,7 @@ type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   errors: any;
 };
 
-export const NumberIput = ({
+export const NumberInput = ({
   label,
   name,
   register,
