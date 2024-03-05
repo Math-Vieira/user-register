@@ -79,13 +79,15 @@ export const PeopleTable = ({
 
   return (
     <>
-      <S.Table>
-        <PeopleTableHeader />
-        <PeopleTableBody
-          peopleList={peopleList}
-          deletedPersonId={deletedPersonId}
-        />
-      </S.Table>
+      <S.TableContainerScroll>
+        <S.Table>
+          <PeopleTableHeader />
+          <PeopleTableBody
+            peopleList={peopleList}
+            deletedPersonId={deletedPersonId}
+          />
+        </S.Table>
+      </S.TableContainerScroll>
       <S.ButtonControllerContainer>
         <Button onClick={decrementPage} fontSize="50px">
           {'<'}
@@ -97,6 +99,7 @@ export const PeopleTable = ({
           {'>'}
         </Button>
       </S.ButtonControllerContainer>
+
       {personToDelete && (
         <DeletePersonModal
           title="Deletando pessoa"

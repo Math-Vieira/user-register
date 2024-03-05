@@ -7,6 +7,7 @@ export const Main = styled.main`
 export const ContentContainer = styled.div`
   min-height: 100vh;
   display: flex;
+  width: 100%;
 
   justify-content: center;
 `;
@@ -20,6 +21,11 @@ export const TitleContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 744px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 export const Title = styled.h1`
@@ -31,6 +37,7 @@ export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
   margin-top: 30px;
+  overflow-x: scroll;
 
   & th {
     text-align: left;

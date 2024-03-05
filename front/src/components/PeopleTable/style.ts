@@ -26,6 +26,14 @@ export const Table = styled.table`
   }
 `;
 
+export const TableContainerScroll = styled.div`
+  width: 100%;
+
+  @media (max-width: 744px) {
+    overflow-x: scroll;
+  }
+`;
+
 export const ButtonControllerContainer = styled.div`
   display: flex;
   justify-content: center;

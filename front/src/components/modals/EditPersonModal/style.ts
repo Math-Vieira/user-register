@@ -25,6 +25,10 @@ export const ModalTitle = styled.h2`
   margin-bottom: 10px;
   min-width: 500px;
   font-size: 35px;
+
+  @media (max-width: 744px) {
+    min-width: 100%;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
