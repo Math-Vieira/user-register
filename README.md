@@ -82,3 +82,12 @@ Abra outro terminal no diretório "front" e rode o seguinte comando:
   </code>
 </pre>
 Pronto, o setup já está concluído e você pode testar a aplicação.
+
+<h2>:grinning: Como rodar os testes</h2>
+Os testes escritos na aplicação são testes e2e, para simular uma requisição ao servidor. Para rodar os testes você deve estar no diretório "back" e rodar o seguinte comando:
+<pre>
+  <code>
+    npm run test:e2e
+  </code>
+</pre>
+É necessário estar com seu banco de dados local ligado (o mesmo que sobe junto com a aplicação num container). O ideal era criar um container novo (mongoDB) exclusivo para o teste rodar, e matar o processamento assim que os testes acabassem, mas isso ficou como TODO, assim como outras funcionalidades que não entraram na cobertura de testes e acabaram ficando como TODO.
