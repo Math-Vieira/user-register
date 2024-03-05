@@ -6,11 +6,21 @@ import { useForm } from 'react-hook-form';
 import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import registerPersonSchema from './validationSchema';
-import { NumberIput } from '@/components/Input/NumberInput';
+import { NumberInput } from '@/components/Input/NumberInput';
 import { useCreatePerson } from '@/hooks/requestHooks/person/use-create-person';
 import { useEffect } from 'react';
+import { Person } from '@/components/PeopleTable';
 
-export const AddPersonModal = ({ closeModal, actionText, title }: Modal) => {
+type AddPersonModalProps = {
+  updateNewPerson: (newPerson: Person) => void;
+} & Modal;
+
+export const AddPersonModal = ({
+  closeModal,
+  actionText,
+  title,
+  updateNewPerson
+}: AddPersonModalProps) => {
   const {
     register,
     handleSubmit,
@@ -24,6 +34,7 @@ export const AddPersonModal = ({ closeModal, actionText, title }: Modal) => {
 
   useEffect(() => {
     if (createPersonService.data) {
+      updateNewPerson(createPersonService.data);
       closeModal();
     }
   }, [createPersonService.data]);
@@ -54,7 +65,7 @@ export const AddPersonModal = ({ closeModal, actionText, title }: Modal) => {
               register={register}
               placeholder="Digite a URL do avatar da pessoa..."
             />
-            <NumberIput
+            <NumberInput
               label="Idade"
               name="age"
               errors={errors}

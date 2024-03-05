@@ -6,13 +6,15 @@ import { RootState } from '@/store';
 import { setUser } from '@/store/user';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PeopleTable } from '@/components/PeopleTable';
+import { PeopleTable, Person } from '@/components/PeopleTable';
 import { AddPersonModal } from '@/components/modals/AddPersonModal';
 
 export const DashboardPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  const [tablePage, setTablePage] = useState(1);
   const getUserService = useGetUser();
+  const [newPerson, setNewPerson] = useState<Person | null>(null);
   const [addPersonModalVisible, setAddPersonModalVisible] = useState(false);
 
   useEffect(() => {
@@ -21,7 +23,6 @@ export const DashboardPage = () => {
 
   useEffect(() => {
     if (getUserService.data) {
-      //set user data - global store
       const { data } = getUserService;
       const { name, email } = data.data;
       dispatch(setUser({ name, email }));
@@ -37,13 +38,22 @@ export const DashboardPage = () => {
               <S.TitleContainer>
                 <S.Title>Lista de pessoas cadastradas</S.Title>
                 <Button
-                  onClick={() => setAddPersonModalVisible(true)}
+                  onClick={() => {
+                    setAddPersonModalVisible(true);
+                    setTablePage(1);
+                  }}
                   fontSize="20px"
                 >
                   Adicione uma nova pessoa
                 </Button>
               </S.TitleContainer>
-              <PeopleTable />
+              <PeopleTable
+                newPerson={newPerson}
+                tablePage={tablePage}
+                updateTablePage={(pageNumber: number) =>
+                  setTablePage(pageNumber)
+                }
+              />
             </S.TableContainer>
           </S.ContentContainer>
         </S.Main>
@@ -53,6 +63,7 @@ export const DashboardPage = () => {
           closeModal={() => setAddPersonModalVisible(false)}
           title="Cadastrando pessoa"
           actionText="CADASTRAR PESSOA"
+          updateNewPerson={(newPerson: Person) => setNewPerson(newPerson)}
         />
       )}
     </>

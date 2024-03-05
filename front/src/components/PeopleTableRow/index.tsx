@@ -2,7 +2,7 @@ import { Person } from '../PeopleTable';
 
 export const PeopleTableRow = ({ name, age, avatar, email }: Person) => {
   return (
-    <tr>
+    <tr className="animeLeft">
       <td>{name}</td>
       <td>{email}</td>
       <td>{avatar}</td>

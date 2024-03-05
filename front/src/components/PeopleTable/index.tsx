@@ -4,6 +4,7 @@ import { useGetPeople } from '@/hooks/requestHooks/person/use-get-people';
 import { Button } from '../Button';
 import { PeopleTableHeader } from '../PeopleTableHeader';
 import { PeopleTableBody } from '../PeopleTableBody';
+import { configPeopleList } from '@/utils/functions/config-people-list';
 
 export type Person = {
   name: string;
@@ -18,22 +19,51 @@ export type TableInfo = {
   people: Person[];
 };
 
-export const PeopleTable = () => {
-  const [tablePage, setTablePage] = useState(1);
+type PeopleTableProps = {
+  newPerson: Person | null;
+  tablePage: number;
+  updateTablePage: (pageNumber: number) => void;
+};
+
+export const PeopleTable = ({
+  newPerson,
+  tablePage,
+  updateTablePage
+}: PeopleTableProps) => {
   const getPeopleService = useGetPeople();
-  const peopleList: TableInfo = getPeopleService.data ?? {
+  const [peopleList, setPeopleList] = useState<TableInfo>({
     totalPages: 1,
     people: []
-  };
+  });
 
   const incrementPage = () =>
-    tablePage < peopleList.totalPages && setTablePage(tablePage + 1);
+    tablePage < peopleList.totalPages && updateTablePage(tablePage + 1);
 
-  const decrementPage = () => tablePage > 1 && setTablePage(tablePage - 1);
+  const decrementPage = () => tablePage > 1 && updateTablePage(tablePage - 1);
 
+  const updatePeopleList = (newPeopleList: TableInfo) => {
+    setPeopleList(newPeopleList);
+  };
+
+  //Get people on page change
   useEffect(() => {
     getPeopleService.makeRequest(tablePage);
   }, [tablePage]);
+
+  //Set people list on data change
+  useEffect(() => {
+    if (getPeopleService.data) {
+      setPeopleList(getPeopleService.data);
+    }
+  }, [getPeopleService.data]);
+
+  //Add new person to list
+  useEffect(() => {
+    if (newPerson) {
+      configPeopleList(updatePeopleList, newPerson, peopleList);
+    }
+  }, [newPerson]);
+
   return (
     <>
       <S.Table>
