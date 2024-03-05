@@ -12,7 +12,7 @@
 <img src ="https://cdn.discordapp.com/attachments/1118878755960651878/1214587842630516816/image.png?ex=65f9a813&is=65e73313&hm=678a05130cbf213dbdbde0afb8e2eb5d1b463cd7938d0a525ff54925d37be584&" />
 
 <h2>:bookmark_tabs: Descrição</h2>
-<p>Este repositório contém o código fonte e a documentação relacionados ao teste técnico realizado como parte do processo seletivo para a vaga de desenvolvedor na DashSkins.</p>
+<p>Este repositório contém o código fonte e a documentação relacionados ao teste técnico realizado como parte do processo seletivo para a vaga de desenvolvedor na DashSkins. A aplicação contém funcionalidades como autenticação e rate limit.</p>
 
 <a href="https://www.figma.com/file/TCkQSBYF6zzknsdVjYKr0f/Test?type=design&node-id=0%3A1&mode=dev&t=Wh3Ct2N9PTVjeUnJ-1">Clique aqui para ver o design do projeto</a>
 <p>Ps: O projeto não seguiu o design à risca, mas está fortemente baseado nele. Durante o desenvolvimento percebi que algumas coisas ficariam melhores de outra maneira, então assim o fiz.</p>
