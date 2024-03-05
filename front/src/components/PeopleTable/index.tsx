@@ -5,8 +5,10 @@ import { Button } from '../Button';
 import { PeopleTableHeader } from '../PeopleTableHeader';
 import { PeopleTableBody } from '../PeopleTableBody';
 import { configPeopleList } from '@/utils/functions/config-people-list';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { DeletePersonModal } from '../modals/DeletePersonModal';
+import { setPersonToDelete } from '@/store/people';
 
 export type Person = {
   name: string;
@@ -33,6 +35,7 @@ export const PeopleTable = ({
   updateTablePage
 }: PeopleTableProps) => {
   const getPeopleService = useGetPeople();
+  const dispatch = useDispatch();
   const [peopleList, setPeopleList] = useState<TableInfo>({
     totalPages: 1,
     people: []
@@ -86,6 +89,15 @@ export const PeopleTable = ({
           {'>'}
         </Button>
       </S.ButtonControllerContainer>
+      {personToDelete && (
+        <DeletePersonModal
+          title="Deletando pessoa"
+          actionText="DELETAR PESSOA"
+          closeModal={() => {
+            dispatch(setPersonToDelete(''));
+          }}
+        />
+      )}
     </>
   );
 };
