@@ -8,7 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import registerSchema from './validationSchema';
-import { useCreateUser } from '@/hooks/requestHooks/user/user-create-user';
+import { useCreateUser } from '@/hooks/requestHooks/user/use-create-user';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
