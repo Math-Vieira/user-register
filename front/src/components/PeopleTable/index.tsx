@@ -4,7 +4,6 @@ import { useGetPeople } from '@/hooks/requestHooks/person/use-get-people';
 import { Button } from '../Button';
 import { PeopleTableHeader } from '../PeopleTableHeader';
 import { PeopleTableBody } from '../PeopleTableBody';
-import { configPeopleList } from '@/utils/functions/config-people-list';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { DeletePersonModal } from '../modals/DeletePersonModal';
@@ -36,6 +35,7 @@ export const PeopleTable = ({
 }: PeopleTableProps) => {
   const getPeopleService = useGetPeople();
   const dispatch = useDispatch();
+  const [deletedPersonId, setDeletedPersonId] = useState<string>('');
   const [peopleList, setPeopleList] = useState<TableInfo>({
     totalPages: 1,
     people: []
@@ -48,10 +48,6 @@ export const PeopleTable = ({
     tablePage < peopleList.totalPages && updateTablePage(tablePage + 1);
 
   const decrementPage = () => tablePage > 1 && updateTablePage(tablePage - 1);
-
-  const updatePeopleList = (newPeopleList: TableInfo) => {
-    setPeopleList(newPeopleList);
-  };
 
   //Get people on page change
   useEffect(() => {
@@ -67,10 +63,11 @@ export const PeopleTable = ({
 
   //Add new person to list
   useEffect(() => {
-    if (newPerson) {
-      configPeopleList(updatePeopleList, newPerson, peopleList);
+    //TODO ver se nao bugou
+    if (newPerson || deletedPersonId) {
+      getPeopleService.makeRequest(tablePage);
     }
-  }, [newPerson]);
+  }, [newPerson, deletedPersonId]);
 
   return (
     <>
@@ -96,6 +93,8 @@ export const PeopleTable = ({
           closeModal={() => {
             dispatch(setPersonToDelete(''));
           }}
+          defineDeletedPerson={(id: string) => setDeletedPersonId(id)}
+          personToDelete={personToDelete}
         />
       )}
     </>

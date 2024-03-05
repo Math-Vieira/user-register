@@ -75,7 +75,7 @@ export const AddPersonModal = ({
           </S.InputContainer>
           <S.ButtonsContainer>
             <Button onClick={closeModal}>CANCELAR</Button>
-            <Button>{actionText}</Button>
+            <Button disabled={createPersonService.loading}>{actionText}</Button>
           </S.ButtonsContainer>
         </S.Form>
       </S.ModalContainer>
