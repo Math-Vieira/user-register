@@ -17,6 +17,8 @@
 <a href="https://www.figma.com/file/TCkQSBYF6zzknsdVjYKr0f/Test?type=design&node-id=0%3A1&mode=dev&t=Wh3Ct2N9PTVjeUnJ-1">Clique aqui para ver o design do projeto</a>
 <p>Ps: O projeto não seguiu o design à risca, mas está fortemente baseado nele. Durante o desenvolvimento percebi que algumas coisas ficariam melhores de outra maneira, então assim o fiz.</p>
 
+<a href="https://www.youtube.com/watch?v=UyOsv4ah_dY&ab_channel=MatheusVieira">Clique aqui para ver o setup do projeto em vídeo</a>
+
 <h2>:grinning: Como rodar o projeto localmente</h2>
 
 <h3>1. Clone o repositório:</h3>
