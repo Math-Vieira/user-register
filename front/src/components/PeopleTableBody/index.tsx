@@ -1,5 +1,7 @@
+import { NotFound } from '../NotFound';
 import { Person, TableInfo } from '../PeopleTable';
 import { PeopleTableRow } from '../PeopleTableRow';
+import * as S from './style';
 
 type PeopleTableBodyProps = {
   peopleList: TableInfo;
@@ -20,6 +22,16 @@ export const PeopleTableBody = ({ peopleList }: PeopleTableBodyProps) => {
           />
         );
       })}
+      {peopleList.people.length === 0 && (
+        <tr>
+          <S.Td colSpan={6} rowSpan={20}>
+            <S.NotFoundContainer>
+              <NotFound />
+              <span>NENHUM DADO ENCONTRADO</span>
+            </S.NotFoundContainer>
+          </S.Td>
+        </tr>
+      )}
     </tbody>
   );
 };
