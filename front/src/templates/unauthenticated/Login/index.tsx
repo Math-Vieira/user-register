@@ -11,6 +11,9 @@ import loginSchema from './validationSchema';
 import { useLoginUser } from '@/hooks/requestHooks/user/use-login-user';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { setCookie } from 'nookies';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/user';
 
 export const LoginPage = () => {
   const {
@@ -19,6 +22,7 @@ export const LoginPage = () => {
     formState: { errors }
   } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const loginUserService = useLoginUser();
 
@@ -28,6 +32,12 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (loginUserService.data) {
+      //Config cookies and global user state
+      const { jwtToken, name, email } = loginUserService.data;
+      setCookie(undefined, 'user.token', jwtToken, {
+        maxAge: 60 * 60 * 1 // 1 hour
+      });
+      dispatch(setUser({ name, email }));
       router.push('/dashboard');
     }
   }, [loginUserService.data]);

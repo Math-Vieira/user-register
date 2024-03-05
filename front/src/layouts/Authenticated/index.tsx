@@ -3,11 +3,15 @@ import { useRouter } from 'next/router';
 import { HeaderLogo } from '@/components/HeaderLogo';
 import { destroyCookie } from 'nookies';
 
-export const AuthenticatedLayout = ({
-  children
-}: {
+type AuthenticatedLayoutProps = {
   children: React.ReactNode;
-}) => {
+  userName: string;
+};
+
+export const AuthenticatedLayout = ({
+  children,
+  userName
+}: AuthenticatedLayoutProps) => {
   const router = useRouter();
   const logout = () => {
     destroyCookie(undefined, 'user.token');
@@ -19,7 +23,7 @@ export const AuthenticatedLayout = ({
       <S.Header>
         <S.HeaderContentContainer className="centralizer">
           <HeaderLogo />
-          <S.NameContainer onClick={logout}>Matheus / Sair</S.NameContainer>
+          <S.NameContainer onClick={logout}>{userName} / Sair</S.NameContainer>
         </S.HeaderContentContainer>
       </S.Header>
       {children}
