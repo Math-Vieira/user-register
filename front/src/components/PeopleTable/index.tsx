@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as S from './style';
 import { useGetPeople } from '@/hooks/requestHooks/person/use-get-people';
-import { PeopleTableRow } from '../PeopleTableRow';
 import { Button } from '../Button';
 import { PeopleTableHeader } from '../PeopleTableHeader';
 import { PeopleTableBody } from '../PeopleTableBody';

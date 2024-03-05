@@ -7,6 +7,8 @@ import { Inputs } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import registerPersonSchema from './validationSchema';
 import { NumberIput } from '@/components/Input/NumberInput';
+import { useCreatePerson } from '@/hooks/requestHooks/person/use-create-person';
+import { useEffect } from 'react';
 
 export const AddPersonModal = ({ closeModal, actionText, title }: Modal) => {
   const {
@@ -14,10 +16,17 @@ export const AddPersonModal = ({ closeModal, actionText, title }: Modal) => {
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>({ resolver: zodResolver(registerPersonSchema) });
+  const createPersonService = useCreatePerson();
 
   const onSubmit = async (data: Inputs) => {
-    console.log(data);
+    await createPersonService.makeRequest(data);
   };
+
+  useEffect(() => {
+    if (createPersonService.data) {
+      closeModal();
+    }
+  }, [createPersonService.data]);
   return (
     <S.ModalOverlay>
       <S.ModalContainer>
