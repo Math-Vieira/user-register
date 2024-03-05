@@ -10,6 +10,7 @@ import { NumberInput } from '@/components/Input/NumberInput';
 import { useCreatePerson } from '@/hooks/requestHooks/person/use-create-person';
 import { useEffect } from 'react';
 import { Person } from '@/components/PeopleTable';
+import { useEditPerson } from '@/hooks/requestHooks/person/use-edit-person';
 
 type EditPersonModalProps = {
   personToEdit: string;
@@ -22,7 +23,8 @@ export const EditPersonModal = ({
   actionText,
   title,
   initialData,
-  fetchPeople
+  fetchPeople,
+  personToEdit
 }: EditPersonModalProps) => {
   const {
     register,
@@ -32,18 +34,18 @@ export const EditPersonModal = ({
     resolver: zodResolver(editPersonSchema),
     defaultValues: initialData
   });
-  const createPersonService = useCreatePerson();
+  const editPersonService = useEditPerson();
 
   const onSubmit = async (data: Inputs) => {
-    await createPersonService.makeRequest(data);
+    await editPersonService.makeRequest({ ...data, _id: personToEdit });
   };
 
   useEffect(() => {
-    if (createPersonService.data) {
+    if (editPersonService.data) {
       fetchPeople();
       closeModal();
     }
-  }, [createPersonService.data]);
+  }, [editPersonService.data]);
   return (
     <S.ModalOverlay>
       <S.ModalContainer>
@@ -77,11 +79,12 @@ export const EditPersonModal = ({
               errors={errors}
               register={register}
               placeholder="Digite a idade da pessoa..."
+              initialValue={initialData?.age}
             />
           </S.InputContainer>
           <S.ButtonsContainer>
             <Button onClick={closeModal}>CANCELAR</Button>
-            <Button disabled={createPersonService.loading}>{actionText}</Button>
+            <Button disabled={editPersonService.loading}>{actionText}</Button>
           </S.ButtonsContainer>
         </S.Form>
       </S.ModalContainer>

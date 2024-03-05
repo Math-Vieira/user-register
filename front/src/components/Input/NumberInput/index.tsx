@@ -7,6 +7,7 @@ type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   register: UseFormRegister<any>;
   errors: any;
+  initialValue?: number | '';
 };
 
 export const NumberInput = ({
@@ -14,14 +15,14 @@ export const NumberInput = ({
   name,
   register,
   errors,
+  initialValue = '',
   ...props
 }: TextInputProps) => {
-  const [value, setValue] = useState<number | ''>('');
+  const [value, setValue] = useState<number | ''>(initialValue);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     //get the last character of the input
-
     const value = e.target.value;
     const lastInput = +value.slice(-1);
     if (!numbers.includes(lastInput)) return;

@@ -7,7 +7,10 @@ const editPersonSchema = z
       message: 'E-mail inválido'
     }),
     avatar: z.string().url({ message: 'Avatar deve ser uma url' }),
-    age: z.string().min(1, { message: 'Idade muito curta' })
+    age: z.union([
+      z.string().min(1, { message: 'Idade muito curta' }),
+      z.number()
+    ])
   })
   .refine(
     (value) => {
