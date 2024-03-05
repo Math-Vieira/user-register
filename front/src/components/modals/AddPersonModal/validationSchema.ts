@@ -6,7 +6,7 @@ const registerPersonSchema = z
     email: z.string().email({
       message: 'E-mail inválido'
     }),
-    avatar: z.string().min(3, { message: 'Avatar muito curto' }),
+    avatar: z.string().url({ message: 'Avatar deve ser uma url' }),
     age: z.string().min(1, { message: 'Idade muito curta' })
   })
   .refine(
